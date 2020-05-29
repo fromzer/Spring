@@ -58,14 +58,13 @@ public class RegistrationController {
         }
 
         if (user.getPassword() != null && !user.getPassword().equals(passwordConfirm)) {
-            model.addAttribute("passwordError", "Password are different!");
-            return "registration";
+            model.addAttribute("passwordError", "Passwords are different!");
         }
 
         if (isConfirmEmpty || bindingResult.hasErrors() || !response.isSuccess()) {
             Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
 
-            model.addAllAttributes(errors);
+            model.mergeAttributes(errors);
 
             return "registration";
         }
